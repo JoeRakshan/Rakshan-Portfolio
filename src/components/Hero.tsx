@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, ArrowDown } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/image0.jpeg";
 import { useState, useEffect } from "react";
 
 const Hero = () => {
@@ -19,7 +19,7 @@ const Hero = () => {
   };
 
   // Typing effect
-  const roles = ["Junior Software Developer", "Full Stack Developer", "React Developer", "AI Enthusiast"];
+  const roles = ["Junior Software Developer", "Full Stack Developer", "AI Enthusiast"];
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);

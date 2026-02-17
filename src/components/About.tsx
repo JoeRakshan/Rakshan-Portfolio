@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Code2, Briefcase, Award } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/image0.jpeg";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
