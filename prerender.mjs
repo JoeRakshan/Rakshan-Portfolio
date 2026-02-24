@@ -16,7 +16,7 @@ async function prerender() {
 
   const critters = new Critters({
     path: path.resolve(__dirname, "dist"),
-    preload: "swap",
+    preload: "media",
     inlineFonts: false,
   });
 
