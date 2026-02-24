@@ -4,12 +4,6 @@ import { MapPin, ArrowDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Hero = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -58,7 +52,7 @@ const Hero = () => {
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Text Content */}
-          <div className={`text-center lg:text-left transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          <div className="text-center lg:text-left">
             
 
             {/* Greeting */}
@@ -107,7 +101,7 @@ const Hero = () => {
           </div>
 
           {/* Right - Profile Photo */}
-          <div className={`flex justify-center lg:justify-end transition-all duration-1000 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+          <div className="flex justify-center lg:justify-end">
             <div className="relative">
               {/* Decorative ring */}
               <div className="absolute -inset-4 bg-primary rounded-2xl blur-xl animate-pulse-glow" />
