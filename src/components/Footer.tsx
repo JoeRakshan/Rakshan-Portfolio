@@ -30,6 +30,7 @@ const Footer = () => {
         <Button
           onClick={scrollToTop}
           size="icon"
+          aria-label="Scroll to top"
           className="rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-12 h-12"
         >
           <ArrowUp className="w-5 h-5" />
@@ -51,7 +52,7 @@ const Footer = () => {
               AI-powered products with modern web technologies.
             </p>
             <div className="flex gap-2">
-              <a href="https://github.com/joeselvarakshan" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/joeselvarakshan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -60,7 +61,7 @@ const Footer = () => {
                   <Github className="w-5 h-5" />
                 </Button>
               </a>
-              <a href="https://www.linkedin.com/in/joe-selva-rakshan/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/joe-selva-rakshan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -69,7 +70,7 @@ const Footer = () => {
                   <Linkedin className="w-5 h-5" />
                 </Button>
               </a>
-              <a href="mailto:joeselvarakshan@gmail.com">
+              <a href="mailto:joeselvarakshan@gmail.com" aria-label="Email">
                 <Button
                   variant="ghost"
                   size="icon"

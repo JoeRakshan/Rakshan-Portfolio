@@ -84,8 +84,8 @@ export default {
 					'50%': { transform: 'translateY(-20px)' }
 				},
 				'pulse-glow': {
-					'0%, 100%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)' },
-					'50%': { boxShadow: '0 0 40px rgba(99, 102, 241, 0.6)' }
+					'0%, 100%': { opacity: '0.2' },
+					'50%': { opacity: '0.4' }
 				},
 				'slide-up': {
 					'0%': { transform: 'translateY(100%)', opacity: '0' },
@@ -108,8 +108,8 @@ export default {
 					'to': { width: '100%' }
 				},
 				'blink': {
-					'0%, 100%': { borderColor: 'transparent' },
-					'50%': { borderColor: 'hsl(var(--primary))' }
+					'0%, 100%': { opacity: '0' },
+					'50%': { opacity: '1' }
 				}
 			},
 			animation: {

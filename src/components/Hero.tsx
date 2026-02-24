@@ -111,7 +111,7 @@ const Hero = () => {
           <div className={`flex justify-center lg:justify-end transition-all duration-1000 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="relative">
               {/* Decorative ring */}
-              <div className="absolute -inset-4 bg-primary rounded-2xl opacity-20 blur-xl animate-pulse-glow" />
+              <div className="absolute -inset-4 bg-primary rounded-2xl blur-xl animate-pulse-glow" />
 
               {/* Photo */}
               <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-primary/20">
@@ -119,6 +119,10 @@ const Hero = () => {
                   src={profilePhoto}
                   alt="Joe Selva Rakshan"
                   className="w-full h-full object-cover"
+                  width={320}
+                  height={320}
+                  // eslint-disable-next-line react/no-unknown-property
+                  fetchpriority="high"
                 />
               </div>
 

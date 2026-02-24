@@ -43,6 +43,9 @@ const About = () => {
                 src={profilePhoto}
                 alt="Joe Selva Rakshan"
                 className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl object-cover shadow-xl ring-1 ring-border group-hover:shadow-2xl transition-all duration-500"
+                width={320}
+                height={320}
+                loading="lazy"
               />
               <div className="absolute -bottom-5 -right-5 bg-background p-4 rounded-xl shadow-lg border border-border">
                 <p className="text-xs text-muted-foreground">Based in</p>
