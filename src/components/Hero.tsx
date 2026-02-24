@@ -51,8 +51,8 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 pb-20 overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-hero-gradient-from/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-hero-gradient-to/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "3s" }} />
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "3s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
@@ -60,22 +60,13 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Text Content */}
           <div className={`text-center lg:text-left transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-            {/* Location Badge */}
-            <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
-              <Badge variant="outline" className="px-4 py-1.5 text-sm gap-2 border-primary/30 bg-primary/5">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                Available for projects
-              </Badge>
-            </div>
+            
 
             {/* Greeting */}
             <p className="text-lg text-muted-foreground mb-2 font-medium">Hello, I'm</p>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-              <span className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">
+              <span className="text-primary">
                 Joe Selva
               </span>
               <br />
@@ -99,7 +90,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 transition-all duration-300 text-white"
+                className="bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 transition-all duration-300 text-white"
                 onClick={() => scrollToSection("projects")}
               >
                 View My Work
@@ -120,7 +111,7 @@ const Hero = () => {
           <div className={`flex justify-center lg:justify-end transition-all duration-1000 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="relative">
               {/* Decorative ring */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to rounded-2xl opacity-20 blur-xl animate-pulse-glow" />
+              <div className="absolute -inset-4 bg-primary rounded-2xl opacity-20 blur-xl animate-pulse-glow" />
 
               {/* Photo */}
               <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-primary/20">
@@ -132,13 +123,13 @@ const Hero = () => {
               </div>
 
               {/* Floating decorative elements */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-hero-gradient-from to-hero-gradient-to rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg animate-bounce-subtle">
+              <div className="absolute -top-6 -right-6 w-12 h-12 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg animate-bounce-subtle">
                 <MapPin className="w-5 h-5" />
               </div>
 
               <div className="absolute -bottom-4 -left-4 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg border border-border">
                 <p className="text-xs text-muted-foreground">Currently at</p>
-                <p className="text-sm font-semibold bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">
+                <p className="text-sm font-semibold text-primary">
                   Skillmine Technologies
                 </p>
               </div>

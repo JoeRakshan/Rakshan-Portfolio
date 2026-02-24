@@ -52,10 +52,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				'hero-gradient': {
-					from: 'hsl(var(--hero-gradient-from))',
-					to: 'hsl(var(--hero-gradient-to))'
-				},
 				'section-bg': 'hsl(var(--section-bg))',
 				'text-subtle': 'hsl(var(--text-subtle))',
 				sidebar: {
@@ -103,10 +99,6 @@ export default {
 					'0%': { transform: 'rotate(0deg)' },
 					'100%': { transform: 'rotate(360deg)' }
 				},
-				'gradient-x': {
-					'0%, 100%': { backgroundPosition: '0% 50%' },
-					'50%': { backgroundPosition: '100% 50%' }
-				},
 				'bounce-subtle': {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-5px)' }
@@ -128,7 +120,6 @@ export default {
 				'slide-up': 'slide-up 0.5s ease-out',
 				'slide-down': 'slide-down 0.5s ease-out',
 				'spin-slow': 'spin-slow 20s linear infinite',
-				'gradient-x': 'gradient-x 3s ease infinite',
 				'bounce-subtle': 'bounce-subtle 2s ease-in-out infinite',
 				'typing': 'typing 3.5s steps(40, end)',
 				'blink': 'blink 1s step-end infinite'

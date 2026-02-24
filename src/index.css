@@ -34,8 +34,6 @@
     --ring: 243 75% 59%;
 
     /* Custom portfolio colors - Light mode */
-    --hero-gradient-from: 243 75% 59%;
-    --hero-gradient-to: 270 70% 55%;
     --section-bg: 235 30% 96%;
     --text-subtle: 230 10% 42%;
 
@@ -80,8 +78,6 @@
     --input: 217.2 32.6% 15%;
     --ring: 243 75% 65%;
 
-    --hero-gradient-from: 243 75% 65%;
-    --hero-gradient-to: 270 70% 58%;
     --section-bg: 224 71% 7%;
     --text-subtle: 215 20.2% 65.1%;
     --sidebar-background: 240 5.9% 10%;

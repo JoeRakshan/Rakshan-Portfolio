@@ -83,7 +83,7 @@ const Navigation = () => {
             {/* Logo */}
             <button
               onClick={() => scrollToSection("home")}
-              className="text-2xl font-bold bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+              className="text-2xl font-bold text-primary hover:opacity-80 transition-opacity"
             >
               JSR
             </button>
@@ -102,7 +102,7 @@ const Navigation = () => {
                 >
                   {item.label}
                   {activeSection === item.id && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to rounded-full" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />
                   )}
                 </button>
               ))}

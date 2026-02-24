@@ -26,7 +26,7 @@ const About = () => {
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-widest">About Me</span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-3 mb-4">
-            Know Me <span className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">Better</span>
+            Know Me <span className="text-primary">Better</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Get to know more about my background, experience, and what drives my passion
@@ -38,7 +38,7 @@ const About = () => {
           {/* Photo */}
           <div className={`flex justify-center lg:justify-start animate-fade-left ${isVisible ? "visible" : ""} delay-200`}>
             <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
+              <div className="absolute -inset-2 bg-primary rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
               <img
                 src={profilePhoto}
                 alt="Joe Selva Rakshan"
@@ -76,7 +76,7 @@ const About = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a href="mailto:joeselvarakshan@gmail.com">
-                <Button className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 transition-all duration-300 text-white gap-2 w-full sm:w-auto">
+                <Button className="bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 transition-all duration-300 text-white gap-2 w-full sm:w-auto">
                   <Mail className="w-4 h-4" />
                   Let's Work Together
                 </Button>
@@ -99,7 +99,7 @@ const About = () => {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
                 <stat.icon className="w-6 h-6 text-primary" />
               </div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent mb-2">
+              <div className="text-4xl font-bold text-primary mb-2">
                 {stat.number}
               </div>
               <div className="text-muted-foreground font-medium">{stat.label}</div>

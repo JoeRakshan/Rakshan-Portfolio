@@ -47,8 +47,8 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-24 bg-section-bg relative overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-hero-gradient-from/5 rounded-full blur-3xl -translate-x-1/2" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-hero-gradient-to/5 rounded-full blur-3xl translate-x-1/2" />
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl -translate-x-1/2" />
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl translate-x-1/2" />
 
       <div className="container mx-auto px-6">
         <div
@@ -57,7 +57,7 @@ const Projects = () => {
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-widest">Portfolio</span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-3 mb-4">
-            Featured <span className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">Projects</span>
+            Featured <span className="text-primary">Projects</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A selection of projects that showcase my skills in development,

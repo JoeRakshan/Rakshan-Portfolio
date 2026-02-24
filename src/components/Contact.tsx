@@ -109,7 +109,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-24 bg-section-bg relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 w-96 h-96 bg-hero-gradient-from/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-0 left-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
 
       <div className="container mx-auto px-6">
         <div
@@ -118,7 +118,7 @@ const Contact = () => {
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-widest">Contact</span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-3 mb-4">
-            Get In <span className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">Touch</span>
+            Get In <span className="text-primary">Touch</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Ready to start your next project? Let's discuss how we can work together
@@ -257,7 +257,7 @@ const Contact = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 text-white h-12"
+                  className="w-full bg-primary hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 text-white h-12"
                 >
                   {isSubmitting ? (
                     <>

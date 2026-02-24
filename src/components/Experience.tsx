@@ -27,7 +27,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden">
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-hero-gradient-to/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
       <div className="container mx-auto px-6">
         <div
@@ -36,7 +36,7 @@ const Experience = () => {
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-widest">Experience</span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-3 mb-4">
-            Work <span className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">Experience</span>
+            Work <span className="text-primary">Experience</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             My professional journey, showcasing the roles and contributions
@@ -47,7 +47,7 @@ const Experience = () => {
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-hero-gradient-from to-hero-gradient-to hidden md:block" />
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary hidden md:block" />
 
             <div className="space-y-10">
               {experiences.map((exp, index) => (
@@ -63,7 +63,7 @@ const Experience = () => {
 
                   <Card className="ml-0 md:ml-16 p-0 overflow-hidden group hover:shadow-xl transition-all duration-500 border-border/50">
                     {/* Card header accent */}
-                    <div className="h-1 bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to" />
+                    <div className="h-1 bg-primary" />
 
                     <div className="p-6 sm:p-8">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">

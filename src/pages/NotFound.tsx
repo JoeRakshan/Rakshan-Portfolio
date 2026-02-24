@@ -16,11 +16,11 @@ const NotFound = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-hero-gradient-from/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-hero-gradient-to/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
 
       <div className="text-center px-6 relative z-10">
-        <h1 className="text-8xl sm:text-9xl font-bold bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent mb-4">
+        <h1 className="text-8xl sm:text-9xl font-bold text-primary mb-4">
           404
         </h1>
         <h2 className="text-2xl font-bold mb-3">Page Not Found</h2>
@@ -29,7 +29,7 @@ const NotFound = () => {
         </p>
         <div className="flex gap-4 justify-center">
           <a href="/">
-            <Button className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to text-white gap-2 hover:shadow-lg hover:shadow-primary/25 transition-all">
+            <Button className="bg-primary hover:bg-primary/90 text-white gap-2 hover:shadow-lg hover:shadow-primary/25 transition-all">
               <Home className="w-4 h-4" />
               Go Home
             </Button>

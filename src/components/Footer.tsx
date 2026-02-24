@@ -30,7 +30,7 @@ const Footer = () => {
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="rounded-full bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to text-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-12 h-12"
+          className="rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-12 h-12"
         >
           <ArrowUp className="w-5 h-5" />
         </Button>
@@ -42,7 +42,7 @@ const Footer = () => {
           <div>
             <button
               onClick={scrollToTop}
-              className="text-2xl font-bold bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent mb-4 block"
+              className="text-2xl font-bold text-primary mb-4 block"
             >
               Joe Selva Rakshan
             </button>
@@ -60,7 +60,7 @@ const Footer = () => {
                   <Github className="w-5 h-5" />
                 </Button>
               </a>
-              <a href="https://linkedin.com/in/joeselvarakshan" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/joe-selva-rakshan/" target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="ghost"
                   size="icon"

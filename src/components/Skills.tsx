@@ -16,7 +16,7 @@ const AnimatedProgress = ({ value, isVisible }: { value: number; isVisible: bool
   return (
     <div className="h-2.5 bg-secondary rounded-full overflow-hidden">
       <div
-        className="h-full bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to rounded-full transition-all duration-1000 ease-out"
+        className="h-full bg-primary rounded-full transition-all duration-1000 ease-out"
         style={{ width: `${width}%` }}
       />
     </div>
@@ -69,7 +69,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-24 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-80 h-80 bg-hero-gradient-from/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
 
       <div className="container mx-auto px-6">
         <div
@@ -78,7 +78,7 @@ const Skills = () => {
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-widest">Expertise</span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-3 mb-4">
-            Skills & <span className="bg-gradient-to-r from-hero-gradient-from to-hero-gradient-to bg-clip-text text-transparent">Technologies</span>
+            Skills & <span className="text-primary">Technologies</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A comprehensive overview of my technical skills and proficiency levels
