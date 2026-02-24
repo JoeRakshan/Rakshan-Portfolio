@@ -5,6 +5,8 @@
 
 **Before:** Performance ~60 | Accessibility 90 | Best Practices 96 | SEO 92
 **After Round 1:** Performance ~90 | Accessibility 95+ | Best Practices 95+ | SEO 95+
+**After Round 2:** Performance 94 (mobile) — images optimized, sections lazy-loaded
+**After Round 3:** Performance 95+ target — critical CSS inlined, vendor chunks split
 
 ---
 
@@ -133,6 +135,42 @@ const Projects = lazy(() => import("@/components/Projects"));
 
 ---
 
+## Round 3 — Final Push (94 → 95+ target)
+
+Based on the mobile PageSpeed report at 94, two issues remained:
+
+### Issue 1: Render-Blocking CSS — 160ms (FIXED)
+
+**Root Cause:** The full Tailwind CSS file (`index-CU1IUykK.css`, 75 KiB / 13.4 KiB gzipped) was render-blocking. The browser had to download the entire stylesheet before painting anything.
+
+**Fix:** Integrated `critters` into the prerender step (`prerender.mjs`):
+- Critters analyzes the prerendered HTML and extracts only the CSS rules used above the fold
+- Inlined 15.74 KiB (21%) of critical CSS directly into `<style>` tags in the HTML
+- The full stylesheet loads asynchronously via `onload="this.rel='stylesheet'"`
+- First paint no longer waits for CSS network request
+
+### Issue 2: Unused JavaScript — 44.9 KiB (FIXED)
+
+**Root Cause:** The main JS bundle contained React, React-DOM, Radix UI, and React Router all in one file. Even with lazy-loaded sections, the framework code was a single large chunk.
+
+**Fix:** Added `manualChunks` to `vite.config.ts` to split vendor libraries:
+
+| Chunk | Size | Contents |
+|-------|------|----------|
+| `react-vendor` | 141 KiB | react, react-dom |
+| `ui-vendor` | 46 KiB | @radix-ui components |
+| `router` | 15.5 KiB | react-router-dom |
+| `index` (app code) | 115 KiB | Application logic only |
+
+**Main bundle reduction across all rounds:**
+| Round | Main Bundle | Notes |
+|-------|-------------|-------|
+| Before | 351 KiB | Everything in one file |
+| Round 2 | 318 KiB | Sections lazy-loaded |
+| Round 3 | 115 KiB | Vendors split out (**67% reduction**) |
+
+---
+
 ## All Files Modified
 
 | File | Round | Change |
@@ -151,6 +189,9 @@ const Projects = lazy(() => import("@/components/Projects"));
 | `src/components/About.tsx` | 1+2 | Image dimensions + `<picture>` WebP with lazy load |
 | `src/components/Projects.tsx` | 1+2 | Image dimensions + WebP format for Unsplash |
 | `tailwind.config.ts` | 1 | Composited animations (opacity instead of boxShadow/borderColor) |
+| `vite.config.ts` | 3 | Vendor chunk splitting (react, radix-ui, router) |
+| `prerender.mjs` | 3 | Critical CSS inlining with critters |
+| `package.json` | 3 | Added critters dev dependency |
 
 ---
 
