@@ -56,6 +56,7 @@ const Footer = () => {
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="GitHub"
                   className="rounded-full hover:text-primary hover:bg-primary/10 transition-all"
                 >
                   <Github className="w-5 h-5" />
@@ -65,6 +66,7 @@ const Footer = () => {
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="LinkedIn"
                   className="rounded-full hover:text-primary hover:bg-primary/10 transition-all"
                 >
                   <Linkedin className="w-5 h-5" />
@@ -74,6 +76,7 @@ const Footer = () => {
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="Email"
                   className="rounded-full hover:text-primary hover:bg-primary/10 transition-all"
                 >
                   <Mail className="w-5 h-5" />
