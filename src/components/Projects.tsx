@@ -11,7 +11,7 @@ const Projects = () => {
       title: "SkillZen — AI Course Platform",
       description:
         "An AI-powered course creator and learning platform that generates personalized courses, quizzes, and learning paths using LangGraph AI. Built with event-driven architecture for scalable real-time features.",
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop&fm=webp&q=80",
       skills: ["React", "NestJS", "MongoDB", "LangGraph AI", "Kafka", "Tailwind CSS"],
       liveUrl: "#",
       githubUrl: "#",
@@ -20,7 +20,7 @@ const Projects = () => {
       title: "App Based Digital Audiometer",
       description:
         "An App-Based Digital Audiometer designed for the modern era, offering a portable, cost-effective solution to assess an individual's hearing capabilities.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&fm=webp&q=80",
       skills: ["React Js", "Node Js", "Chart Js"],
       liveUrl: "#",
       githubUrl: "#",
@@ -29,7 +29,7 @@ const Projects = () => {
       title: "Construction Product Booking",
       description:
         "A comprehensive online platform for the seamless booking of construction products, including bricks, cement, and steel.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop&fm=webp&q=80",
       skills: ["React", "Node.js", "MongoDB"],
       liveUrl: "#",
       githubUrl: "#",
@@ -38,7 +38,7 @@ const Projects = () => {
       title: "Birds and Animal Species Identification",
       description:
         "A machine learning-powered species identification app that identifies animals and birds from images with a user-friendly upload and prediction interface.",
-      image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop",
+      image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&h=400&fit=crop&fm=webp&q=80",
       skills: ["Python", "Flask", "HTML", "CSS"],
       liveUrl: "#",
       githubUrl: "#",

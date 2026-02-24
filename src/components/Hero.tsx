@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, ArrowDown } from "lucide-react";
-import profilePhoto from "@/assets/image0.jpeg";
 import { useState, useEffect } from "react";
 
 const Hero = () => {
@@ -115,15 +114,18 @@ const Hero = () => {
 
               {/* Photo */}
               <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-primary/20">
-                <img
-                  src={profilePhoto}
-                  alt="Joe Selva Rakshan"
-                  className="w-full h-full object-cover"
-                  width={320}
-                  height={320}
-                  // eslint-disable-next-line react/no-unknown-property
-                  fetchpriority="high"
-                />
+                <picture>
+                  <source srcSet="/profile.webp" type="image/webp" />
+                  <img
+                    src="/profile.jpg"
+                    alt="Joe Selva Rakshan"
+                    className="w-full h-full object-cover"
+                    width={320}
+                    height={320}
+                    // eslint-disable-next-line react/no-unknown-property
+                    fetchpriority="high"
+                  />
+                </picture>
               </div>
 
               {/* Floating decorative elements */}

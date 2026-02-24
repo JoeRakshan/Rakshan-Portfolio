@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Code2, Briefcase, Award } from "lucide-react";
-import profilePhoto from "@/assets/image0.jpeg";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
@@ -39,14 +38,17 @@ const About = () => {
           <div className={`flex justify-center lg:justify-start animate-fade-left ${isVisible ? "visible" : ""} delay-200`}>
             <div className="relative group">
               <div className="absolute -inset-2 bg-primary rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
-              <img
-                src={profilePhoto}
-                alt="Joe Selva Rakshan"
-                className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl object-cover shadow-xl ring-1 ring-border group-hover:shadow-2xl transition-all duration-500"
-                width={320}
-                height={320}
-                loading="lazy"
-              />
+              <picture>
+                <source srcSet="/profile.webp" type="image/webp" />
+                <img
+                  src="/profile.jpg"
+                  alt="Joe Selva Rakshan"
+                  className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl object-cover shadow-xl ring-1 ring-border group-hover:shadow-2xl transition-all duration-500"
+                  width={320}
+                  height={320}
+                  loading="lazy"
+                />
+              </picture>
               <div className="absolute -bottom-5 -right-5 bg-background p-4 rounded-xl shadow-lg border border-border">
                 <p className="text-xs text-muted-foreground">Based in</p>
                 <p className="text-sm font-semibold">Tirunelveli, India</p>
