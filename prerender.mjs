@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
+import Critters from "critters";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,6 +14,12 @@ async function prerender() {
     appType: "custom",
   });
 
+  const critters = new Critters({
+    path: path.resolve(__dirname, "dist"),
+    preload: "swap",
+    inlineFonts: false,
+  });
+
   try {
     const { render } = await vite.ssrLoadModule("/src/entry-server.tsx");
     const template = fs.readFileSync(
@@ -22,10 +29,13 @@ async function prerender() {
 
     for (const route of ROUTES) {
       const appHtml = render(route);
-      const html = template.replace(
+      let html = template.replace(
         '<div id="root"></div>',
         `<div id="root">${appHtml}</div>`
       );
+
+      // Inline critical CSS and defer the rest
+      html = await critters.process(html);
 
       const filePath =
         route === "/"
