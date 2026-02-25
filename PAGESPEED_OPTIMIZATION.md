@@ -7,6 +7,7 @@
 **After Round 1:** Performance ~90 | Accessibility 95+ | Best Practices 95+ | SEO 95+
 **After Round 2:** Performance 94 (mobile) — images optimized, sections lazy-loaded
 **After Round 3:** Performance 95+ target — critical CSS inlined, vendor chunks split
+**After Round 4:** SEO 92 → 95+ target — robots.txt fix, structured data, canonical URL
 
 ---
 
@@ -171,16 +172,68 @@ Based on the mobile PageSpeed report at 94, two issues remained:
 
 ---
 
+## Round 4 — SEO Fix (92 → 95+ target, mobile & desktop)
+
+Both mobile and desktop had SEO stuck at 92. PageSpeed flagged one error:
+
+### Issue 1: robots.txt is not valid — "Unknown directive" (FIXED)
+
+**Root Cause:** Cloudflare's **AI Audit** feature was injecting a non-standard `Content-Signal: search=yes,ai-train=no` directive into the served robots.txt at line 29. This is not a recognized robots.txt directive, so PageSpeed flags the entire file as invalid.
+
+The source `public/robots.txt` only had 16 lines, but the live version served by Cloudflare had 74 lines with the injected block prepended.
+
+**Fix:**
+- Added standard `Disallow: /` rules for all AI bots in `public/robots.txt` using valid robots.txt syntax (Amazonbot, Bytespider, CCBot, ClaudeBot, Google-Extended, GPTBot, meta-externalagent, Applebot-Extended)
+- **Required manual step:** Disable Cloudflare AI Audit in the dashboard (Security → Bots → AI Audit) to stop the invalid `Content-Signal` injection. The standard Disallow rules we added provide the same protection.
+
+### Issue 2: Missing canonical URL (ADDED)
+
+**Root Cause:** No `<link rel="canonical">` tag was present. While PageSpeed marked this as "Not applicable" for a single-page site, adding it is a best practice that prevents duplicate content issues.
+
+**Fix:** Added to `index.html`:
+```html
+<link rel="canonical" href="https://joeselvarakshan.site/" />
+```
+
+### Issue 3: No structured data (ADDED)
+
+**Root Cause:** PageSpeed listed "Structured data is valid" under "Additional items to manually check" — meaning no structured data was present to validate. Adding JSON-LD helps search engines understand the page content and can enable rich results.
+
+**Fix:** Added JSON-LD `ProfilePage` + `Person` schema to `index.html`:
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Joe Selva Rakshan",
+    "jobTitle": "Junior Software Developer",
+    "url": "https://joeselvarakshan.site",
+    "image": "https://joeselvarakshan.site/og-image.jpg",
+    "description": "Junior Software Developer specializing in React, NestJS, and Full Stack development.",
+    "knowsAbout": ["React", "NestJS", "Full Stack Development", "TypeScript", "AI"]
+  }
+}
+</script>
+```
+
+### Issue 4: Missing `<lastmod>` in sitemap (ADDED)
+
+**Fix:** Added `<lastmod>2025-02-25</lastmod>` to `public/sitemap.xml` to signal freshness to crawlers.
+
+---
+
 ## All Files Modified
 
 | File | Round | Change |
 |------|-------|--------|
-| `public/robots.txt` | 1 | Added Sitemap directive |
-| `public/sitemap.xml` | 1 | New — basic sitemap |
+| `public/robots.txt` | 1, 4 | Added Sitemap directive; added standard AI bot Disallow rules |
+| `public/sitemap.xml` | 1, 4 | New — basic sitemap; added `<lastmod>` date |
 | `public/_headers` | 1 | New — Cloudflare security headers |
 | `public/profile.webp` | 2 | New — optimized WebP hero image (33 KiB) |
 | `public/profile.jpg` | 2 | New — resized JPEG fallback (57 KiB) |
-| `index.html` | 1+2 | Preconnect hints + image preload |
+| `index.html` | 1+2+4 | Preconnect hints + image preload + canonical URL + JSON-LD structured data |
 | `src/AppRoutes.tsx` | 1 | Lazy-load NotFound page |
 | `src/pages/Index.tsx` | 2 | Lazy-load all below-fold sections |
 | `src/components/Navigation.tsx` | 1 | aria-label on mobile menu button |
@@ -200,3 +253,4 @@ Based on the mobile PageSpeed report at 94, two issues remained:
 1. `npm run build` — passes with no errors or warnings
 2. `npm run preview` — check site works correctly on localhost
 3. Deploy to Cloudflare Pages and run PageSpeed Insights on both mobile and desktop
+4. **Round 4 critical step:** Disable Cloudflare AI Audit (Dashboard → Security → Bots → AI Audit) before re-testing SEO score, otherwise the invalid `Content-Signal` directive will still be injected into the served robots.txt
