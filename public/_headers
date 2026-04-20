@@ -4,5 +4,5 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.onesignal.com https://*.onesignal.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://images.unsplash.com https://*.onesignal.com data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com https://onesignal.com https://*.onesignal.com wss://*.onesignal.com; worker-src 'self' blob:; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://cdn.onesignal.com https://*.onesignal.com; style-src 'self' 'unsafe-inline' https://cdn.onesignal.com https://onesignal.com https://*.onesignal.com; img-src 'self' https://images.unsplash.com https://*.onesignal.com data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com https://onesignal.com https://*.onesignal.com wss://*.onesignal.com; worker-src 'self' blob:; frame-ancestors 'none'
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

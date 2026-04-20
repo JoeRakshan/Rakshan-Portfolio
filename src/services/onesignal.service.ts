@@ -12,7 +12,7 @@ export async function initOneSignal(): Promise<void> {
   initPromise = OneSignal.init({
     appId: ONESIGNAL_APP_ID,
     allowLocalhostAsSecureOrigin: import.meta.env.DEV,
-    serviceWorkerPath: "OneSignalSDKWorker.js",
+    serviceWorkerPath: "/OneSignalSDKWorker.js",
   })
     .then(async () => {
       initialized = true;
