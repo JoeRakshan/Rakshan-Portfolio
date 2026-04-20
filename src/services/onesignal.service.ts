@@ -1,5 +1,7 @@
 import OneSignal from "react-onesignal";
 
+const ONESIGNAL_APP_ID = "0c40b82e-e151-4390-a9e8-aab6001ac933";
+
 let initialized = false;
 let initPromise: Promise<void> | null = null;
 
@@ -7,14 +9,8 @@ export async function initOneSignal(): Promise<void> {
   if (initialized) return;
   if (initPromise) return initPromise;
 
-  const appId = import.meta.env.VITE_ONESIGNAL_APP_ID;
-  if (!appId || appId === "PASTE_YOUR_ONESIGNAL_APP_ID_HERE") {
-    console.warn("[OneSignal] VITE_ONESIGNAL_APP_ID is not set — skipping init");
-    return;
-  }
-
   initPromise = OneSignal.init({
-    appId,
+    appId: ONESIGNAL_APP_ID,
     allowLocalhostAsSecureOrigin: import.meta.env.DEV,
     serviceWorkerPath: "OneSignalSDKWorker.js",
     notifyButton: { enable: false },
