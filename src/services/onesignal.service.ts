@@ -13,10 +13,14 @@ export async function initOneSignal(): Promise<void> {
     appId: ONESIGNAL_APP_ID,
     allowLocalhostAsSecureOrigin: import.meta.env.DEV,
     serviceWorkerPath: "OneSignalSDKWorker.js",
-    notifyButton: { enable: false },
   })
-    .then(() => {
+    .then(async () => {
       initialized = true;
+      try {
+        await OneSignal.Slidedown.promptPush({ force: true });
+      } catch (err) {
+        console.warn("[OneSignal] slidedown prompt failed", err);
+      }
     })
     .catch((err) => {
       console.error("[OneSignal] init failed", err);
@@ -28,4 +32,9 @@ export async function initOneSignal(): Promise<void> {
 
 export function isOneSignalInitialized(): boolean {
   return initialized;
+}
+
+export async function promptPush(): Promise<void> {
+  if (!initialized) await initOneSignal();
+  await OneSignal.Slidedown.promptPush({ force: true });
 }
