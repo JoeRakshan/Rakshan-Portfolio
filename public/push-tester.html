@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OneSignal Push Tester</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; padding: 2rem; background: #f3f4f6; color: #111827; }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { margin: 0 0 0.25rem; font-size: 1.5rem; }
+    .sub { color: #6b7280; margin: 0 0 2rem; font-size: 0.9rem; }
+    .card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+    label { display: block; font-weight: 500; font-size: 0.85rem; margin-bottom: 0.25rem; color: #374151; }
+    input, textarea, select { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; margin-bottom: 0.875rem; }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    textarea { resize: vertical; min-height: 80px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hint { font-size: 0.75rem; color: #6b7280; margin-top: -0.75rem; margin-bottom: 0.875rem; }
+    button { background: #6366f1; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%; }
+    button:hover:not(:disabled) { background: #4f46e5; }
+    button:disabled { background: #9ca3af; cursor: not-allowed; }
+    .response { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.8rem; background: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 6px; white-space: pre-wrap; word-break: break-all; max-height: 400px; overflow: auto; }
+    .status { padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 1rem; }
+    .status.success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .status.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .status.info { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+    .radio-group { display: flex; gap: 1rem; margin-bottom: 0.875rem; }
+    .radio-group label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal; margin-bottom: 0; }
+    .radio-group input { width: auto; margin: 0; }
+    .warn { background: #fef3c7; border: 1px solid #fcd34d; color: #92400e; padding: 0.75rem; border-radius: 6px; font-size: 0.8rem; margin-bottom: 1rem; }
+    .warn strong { color: #78350f; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>OneSignal Push Tester</h1>
+    <p class="sub">Direct OneSignal REST API call — bypasses any backend. Use to isolate delivery issues.</p>
+
+    <div class="warn">
+      <strong>⚠️ Security warning:</strong> REST API Key should never be exposed in production. This page is for LOCAL DEV TESTING only. Delete/ignore after debugging.
+    </div>
+
+    <div class="card">
+      <label>App ID</label>
+      <input type="text" id="app_id" placeholder="uuid (e.g. cec9006f-d518-4317-8e64-f15c1b4980a1)" />
+      <div class="hint">From OneSignal dashboard → Settings → Keys & IDs</div>
+
+      <label>REST API Key</label>
+      <input type="password" id="rest_api_key" placeholder="Basic key for this app" />
+      <div class="hint">Same location — "REST API Key" (not the public key)</div>
+
+      <label>Target Mode</label>
+      <div class="radio-group">
+        <label><input type="radio" name="target_mode" value="external_id" checked /> External ID (specific user)</label>
+        <label><input type="radio" name="target_mode" value="segment" /> Segment (broadcast)</label>
+        <label><input type="radio" name="target_mode" value="subscription_id" /> Subscription ID</label>
+      </div>
+
+      <label id="target_label">External User ID</label>
+      <input type="text" id="target_value" placeholder="e.g. f028012b-e863-4acc-a3b8-a48dbef18a7a" />
+
+      <div class="row">
+        <div>
+          <label>Title</label>
+          <input type="text" id="title" placeholder="Notification title" />
+        </div>
+        <div>
+          <label>Message</label>
+          <input type="text" id="message" placeholder="Body text" />
+        </div>
+      </div>
+
+      <label>Action URL (optional)</label>
+      <input type="text" id="action_url" placeholder="https://..." />
+
+      <label>Hero Image URL (optional)</label>
+      <input type="text" id="image_url" placeholder="https://cdn.example.com/image.jpg" />
+
+      <button id="send_btn">Send Push</button>
+    </div>
+
+    <div class="card">
+      <label style="margin-bottom: 0.5rem;">Response</label>
+      <div id="status"></div>
+      <div class="response" id="response">(Waiting for first send...)</div>
+    </div>
+  </div>
+
+  <script>
+    // ===== Optional: hardcode defaults here =====
+    // Replace these with your Skillzen OneSignal app creds to skip filling the form each time.
+    const DEFAULT_APP_ID = '';        // e.g. 'cec9006f-d518-4317-8e64-f15c1b4980a1'
+    const DEFAULT_REST_API_KEY = '';  // e.g. 'os_v2_app_...'
+    const DEFAULT_EXTERNAL_ID = '';   // e.g. 'f028012b-e863-4acc-a3b8-a48dbef18a7a'
+    // ============================================
+
+    const appIdInput = document.getElementById('app_id');
+    const keyInput = document.getElementById('rest_api_key');
+    const targetValueInput = document.getElementById('target_value');
+    const targetLabel = document.getElementById('target_label');
+    const titleInput = document.getElementById('title');
+    const messageInput = document.getElementById('message');
+    const actionUrlInput = document.getElementById('action_url');
+    const imageUrlInput = document.getElementById('image_url');
+    const sendBtn = document.getElementById('send_btn');
+    const responseEl = document.getElementById('response');
+    const statusEl = document.getElementById('status');
+
+    if (DEFAULT_APP_ID) appIdInput.value = DEFAULT_APP_ID;
+    if (DEFAULT_REST_API_KEY) keyInput.value = DEFAULT_REST_API_KEY;
+    if (DEFAULT_EXTERNAL_ID) targetValueInput.value = DEFAULT_EXTERNAL_ID;
+
+    // Update target label + placeholder based on mode
+    document.querySelectorAll('input[name="target_mode"]').forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        const mode = e.target.value;
+        if (mode === 'external_id') {
+          targetLabel.textContent = 'External User ID';
+          targetValueInput.placeholder = 'e.g. f028012b-e863-4acc-a3b8-a48dbef18a7a';
+        } else if (mode === 'segment') {
+          targetLabel.textContent = 'Segment Name';
+          targetValueInput.placeholder = 'e.g. Subscribed Users';
+          targetValueInput.value = 'Subscribed Users';
+        } else if (mode === 'subscription_id') {
+          targetLabel.textContent = 'OneSignal Subscription ID (player_id)';
+          targetValueInput.placeholder = 'e.g. 7e0b5488-02f0-4e1e-bf84-339a8649d4a5';
+        }
+      });
+    });
+
+    function showStatus(kind, text) {
+      statusEl.className = 'status ' + kind;
+      statusEl.textContent = text;
+    }
+
+    async function sendPush() {
+      const app_id = appIdInput.value.trim();
+      const rest_api_key = keyInput.value.trim();
+      const target_mode = document.querySelector('input[name="target_mode"]:checked').value;
+      const target_value = targetValueInput.value.trim();
+      const title = titleInput.value.trim();
+      const message = messageInput.value.trim();
+      const action_url = actionUrlInput.value.trim();
+      const image_url = imageUrlInput.value.trim();
+
+      if (!app_id || !rest_api_key) {
+        showStatus('error', 'App ID and REST API Key are required.');
+        return;
+      }
+      if (!title || !message) {
+        showStatus('error', 'Title and Message are required.');
+        return;
+      }
+      if (!target_value) {
+        showStatus('error', 'Target value is required.');
+        return;
+      }
+
+      const body = {
+        app_id: app_id,
+        headings: { en: title },
+        contents: { en: message },
+      };
+
+      if (target_mode === 'external_id') {
+        body.include_aliases = { external_id: [target_value] };
+        body.target_channel = 'push';
+      } else if (target_mode === 'segment') {
+        body.included_segments = [target_value];
+      } else if (target_mode === 'subscription_id') {
+        body.include_subscription_ids = [target_value];
+      }
+
+      if (action_url) body.url = action_url;
+      if (image_url) {
+        body.chrome_web_image = image_url;
+        body.big_picture = image_url;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending...';
+      showStatus('info', 'Calling OneSignal API...');
+      responseEl.textContent = 'Request:\n' + JSON.stringify(body, null, 2);
+
+      try {
+        const response = await fetch('https://api.onesignal.com/notifications', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Key ' + rest_api_key,
+          },
+          body: JSON.stringify(body),
+        });
+
+        const data = await response.json();
+        const timestamp = new Date().toLocaleString();
+
+        responseEl.textContent =
+          '─── Request (' + timestamp + ') ───\n' +
+          JSON.stringify(body, null, 2) +
+          '\n\n─── Response (HTTP ' + response.status + ') ───\n' +
+          JSON.stringify(data, null, 2);
+
+        if (response.ok && data.id) {
+          showStatus(
+            'success',
+            '✓ Accepted by OneSignal. ID: ' + data.id + ' | Recipients: ' + (data.recipients || 0)
+          );
+        } else if (data.errors) {
+          showStatus('error', '✗ ' + (Array.isArray(data.errors) ? data.errors.join(', ') : data.errors));
+        } else {
+          showStatus('error', '✗ HTTP ' + response.status + ' — check response below');
+        }
+      } catch (err) {
+        responseEl.textContent = 'Network error:\n' + err.message;
+        showStatus('error', '✗ Network error: ' + err.message);
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send Push';
+      }
+    }
+
+    sendBtn.addEventListener('click', sendPush);
+
+    // Pre-fill target label on load
+    document.querySelector('input[name="target_mode"]:checked').dispatchEvent(new Event('change'));
+  </script>
+</body>
+</html>
