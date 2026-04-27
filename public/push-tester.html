@@ -161,6 +161,12 @@
         app_id: app_id,
         headings: { en: title },
         contents: { en: message },
+        priority: 10,
+        ttl: 259200,
+        chrome_web_icon: window.location.origin + '/favicon.ico',
+        chrome_web_badge: window.location.origin + '/favicon.ico',
+        name: 'Tester: ' + title,
+        data: {},
       };
 
       if (target_mode === 'external_id') {
@@ -173,7 +179,10 @@
         body.target_channel = 'push';
       }
 
-      if (action_url) body.url = action_url;
+      if (action_url) {
+        body.url = action_url;
+        body.web_url = action_url;
+      }
       if (image_url) {
         body.chrome_web_image = image_url;
         body.big_picture = image_url;
