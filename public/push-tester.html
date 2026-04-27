@@ -194,7 +194,7 @@
       responseEl.textContent = 'Request:\n' + JSON.stringify(body, null, 2);
 
       try {
-        const response = await fetch('https://api.onesignal.com/notifications', {
+        const response = await fetch('https://api.onesignal.com/notifications?c=push', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -213,10 +213,13 @@
           JSON.stringify(data, null, 2);
 
         if (response.ok && data.id) {
-          showStatus(
-            'success',
-            '✓ Accepted by OneSignal. ID: ' + data.id + ' | Recipients: ' + (data.recipients || 0)
-          );
+          // OneSignal's v2 API omits the `recipients` field when targeting
+          // by include_subscription_ids — it's only present for aliases and
+          // segments. Don't claim "Recipients: 0" when the field is just absent.
+          const recipientsText = typeof data.recipients === 'number'
+            ? ' | Recipients: ' + data.recipients
+            : ' | Check OneSignal dashboard for delivery stats';
+          showStatus('success', '✓ Accepted by OneSignal. ID: ' + data.id + recipientsText);
         } else if (data.errors) {
           showStatus('error', '✗ ' + (Array.isArray(data.errors) ? data.errors.join(', ') : data.errors));
         } else {
