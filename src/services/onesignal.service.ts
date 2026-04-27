@@ -1,6 +1,6 @@
 import OneSignal from "react-onesignal";
 
-const ONESIGNAL_APP_ID = "0c40b82e-e151-4390-a9e8-aab6001ac933";
+const ONESIGNAL_APP_ID = "d2722bf0-89b9-4c13-8bb3-bfc41debd6c8";
 
 let initialized = false;
 let initPromise: Promise<void> | null = null;
