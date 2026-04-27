@@ -170,6 +170,7 @@
         body.included_segments = [target_value];
       } else if (target_mode === 'subscription_id') {
         body.include_subscription_ids = [target_value];
+        body.target_channel = 'push';
       }
 
       if (action_url) body.url = action_url;
